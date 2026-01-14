@@ -21,7 +21,7 @@ The main goal of this repository is to improve my JavaScript skills and build a 
 - Visual Studio Code
 - Git & GitHub
 
-# Author
+## Author
 
 Edu  
 Beginner JavaScript Developer
