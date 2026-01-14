@@ -20,3 +20,4 @@ const numero = 7;
 console.log(`Eu moro em ${cidade}, ${pais}`);
 console.log(`Minha cor favorita é ${cor}`);
 console.log(`O dobro de ${numero} é ${numero * 2}`);
+console.log("Teste de commit");
