@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iluminação Diária - Ensinamentos Budistas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* BACKDROP ZEN - Fundo visual minimalista */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 180, 140, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(140, 160, 180, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(180, 170, 140, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('Cena zen com pedras e luz.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            padding: 60px 50px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c2c2c;
+            margin-bottom: 12px;
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            line-height: 1.8;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            color: #555;
+            font-weight: 400;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 18px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            color: #333;
+        }
+
+        input::placeholder {
+            color: #bbb;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #999;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background: #555;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .resultado {
+            margin-top: 50px;
+            padding: 35px 30px;
+            background: linear-gradient(135deg, #f9f9f9 0%, #f5f5f5 100%);
+            border-left: 3px solid #999;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .resultado.ativo {
+            display: block;
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .resultado p {
+            color: #444;
+            font-size: 17px;
+            line-height: 1.8;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .erro {
+            color: #666;
+            font-size: 13px;
+            margin-top: 15px;
+            display: none;
+            padding: 12px 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            border-left: 3px solid #ccc;
+        }
+
+        .erro.ativo {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .resultado {
+                padding: 25px 20px;
+            }
+
+            .resultado p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="Buda meditante sobre flor de lótus.png" alt="Buda meditante" class="icon">
+        <h1>Iluminação Diária</h1>
+        <p class="subtitle">Receba um ensinamento budista para despertar seu caminho espiritual</p>
+
+        <div class="form-group">
+            <label for="nome">Seu Nome</label>
+            <input 
+                type="text" 
+                id="nome" 
+                placeholder="Digite seu nome..." 
+                autofocus
+            >
+        </div>
+
+        <button onclick="gerar()">Receber Ensinamento</button>
+
+        <div class="erro" id="erro"></div>
+
+        <div class="resultado" id="resultado">
+            <p id="mensagem"></p>
+        </div>
+    </div>
+
+    <script>
+        const MENSAGENS = [
+            "O sofrimento existe, mas esquecido não durará.",
+            "Que todos os seres sejam livres do sofrimento.",
+            "A compaixão é o verdadeiro caminho para a paz interior.",
+            "Cada momento é uma oportunidade para começar novamente.",
+            "O ego é a raiz de toda ilusão e sofrimento.",
+            "A iluminação não é atingir algo novo, é acordar para a realidade.",
+            "Cultive a bondade e colherá a paz.",
+            "O presente é o único tempo que você realmente possui.",
+            "A mente é como água: quando está agitada, não reflete claramente.",
+            "Abandone a raiva, abandone o apego. Assim você encontrará paz.",
+            "O Buda está em você, apenas acordado e consciente.",
+            "Meditar é retornar ao seu verdadeiro eu.",
+            "Tudo é impermanente, tudo muda. Aceite isto e seja livre.",
+            "A sabedoria vem do silêncio interior.",
+            "O caminho do meio evita os extremos e leva à paz.",
+            "Perdoe os outros não porque eles merecem, mas para libertar a si mesmo.",
+            "Você é responsável pelo seu próprio despertar espiritual.",
+            "A verdadeira riqueza é o contentamento com o que você tem.",
+            "Observar seus pensamentos sem julgá-los é o começo da liberdade.",
+            "Cada respiração é uma chance de deixar ir o que não serve.",
+            "A gentileza é a força mais poderosa do universo.",
+            "Quando você consegue estar em paz consigo mesmo, está em paz com tudo.",
+            "O apego é a causa de todo o sofrimento. Solte-se.",
+            "Viva como um lótus: enraizado na lama, mas elevado e puro.",
+            "A ignorância é a escuridão, o conhecimento é a luz.",
+            "Sua natureza verdadeira é pura, calma e iluminada.",
+            "O nada que você teme não é nada, é tudo.",
+            "Cultive a paciência, ela é a raiz da paz.",
+            "A realidade é aquilo que você experimenta aqui e agora.",
+            "Cada ser tem a Natureza de Buda dentro de si.",
+            "Não procure a verdade fora de você, está dentro.",
+            "A morte não é o fim, é uma transformação.",
+            "Viva com intenção, cada ação tem consequências.",
+            "O karma é a lei universal da causa e efeito.",
+            "Saia do reino dos pensamentos e entre no reino do ser.",
+            "A verdadeira felicidade não depende de circunstâncias externas.",
+            "Aprenda a morrer a cada dia e viverá mais plenamente.",
+            "A prática constante leva ao despertar gradual.",
+            "Você não é seus pensamentos, você é o observador deles.",
+            "O caminho para a iluminação começa onde você está.",
+            "A aceitação é o primeiro passo para a transformação.",
+            "Renuncie ao desejo de controlar tudo e ganhe verdadeira liberdade.",
+            "Cada momento é sagrado quando vivido com plena atenção.",
+            "A compaixão começa com o amor por si mesmo.",
+            "Escape da prisão da mente através da meditação.",
+            "O nirvana não é um lugar, é um estado de ser.",
+            "Cultive a alegria genuína pela felicidade dos outros.",
+            "A verdade é simples: sofra menos, ame mais.",
+            "Você é o criador do seu próprio destino através das ações presentes.",
+            "O Buda ensinou: desperte e seja livre, mas a jornada é sua."
+        ];
+
+        function obterMensagemMotivacional(nome) {
+            if (!nome || typeof nome !== 'string') {
+                throw new Error('Por favor, digite um nome válido');
+            }
+            
+            // Capitalizar: primeira letra maiúscula, resto minúsculo
+            const nomeCapitalizado = nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase();
+            
+            const hoje = new Date().toISOString().split('T')[0];
+            const chave = `biscoito_${nomeCapitalizado}`;
+            const dados = JSON.parse(localStorage.getItem(chave)) || {};
+
+            // Se é um dia novo, gera novo índice
+            if (dados.data !== hoje) {
+                // Usar o nome e a data para gerar um índice consistente
+                const seed = nomeCapitalizado + hoje;
+                let hash = 0;
+                for (let i = 0; i < seed.length; i++) {
+                    hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+                    hash = hash & hash; // Converter para inteiro de 32 bits
+                }
+                const novoIndice = Math.abs(hash) % MENSAGENS.length;
+                
+                dados.data = hoje;
+                dados.indice = novoIndice;
+                localStorage.setItem(chave, JSON.stringify(dados));
+            }
+
+            return `${nomeCapitalizado}, ${MENSAGENS[dados.indice]}`;
+        }
+
+        function gerar() {
+            const inputNome = document.getElementById('nome');
+            const resultadoDiv = document.getElementById('resultado');
+            const mensagemP = document.getElementById('mensagem');
+            const erroDiv = document.getElementById('erro');
+
+            try {
+                const nome = inputNome.value.trim();
+                const mensagem = obterMensagemMotivacional(nome);
+                
+                mensagemP.textContent = mensagem;
+                resultadoDiv.classList.add('ativo');
+                erroDiv.classList.remove('ativo');
+            } catch (erro) {
+                erroDiv.textContent = erro.message;
+                erroDiv.classList.add('ativo');
+                resultadoDiv.classList.remove('ativo');
+            }
+        }
+
+        document.getElementById('nome').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                gerar();
+            }
+        });
+    </script>
+</body>
+</html>

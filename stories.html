@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iluminação Diária - Stories</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fff;
+            background-image: url('Cena zen com pedras e luz.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container-stories {
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 9 / 16;
+            background-color: transparent;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 30px;
+        }
+
+        /* Overlay elegante com gradiente sutil */
+        .container-stories::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.2) 100%);
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .icon-stories {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            color: #777;
+            font-size: 42px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+        }
+
+        .mensagem-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 35px 30px;
+            margin: 50px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .mensagem-box p {
+            color: #2c2c2c;
+            font-size: 22px;
+            line-height: 1.8;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            text-shadow: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-stories {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            font-size: 15px;
+            font-weight: 300;
+            text-align: center;
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #9d8b7e 0%, #8b7d72 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #b5a399 0%, #a89587 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .share-hint {
+            color: #999;
+            font-size: 11px;
+            margin-top: 10px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        .share-button {
+            margin-top: 15px;
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #b8b9b2 0%, #b8b9b2 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(171, 179, 176, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+
+        .share-button-insta {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #b2bbb8 0%, #b2bbb8 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(163, 173, 170, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+
+        .share-button-insta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(131, 133, 132, 0.6);
+        }
+
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(153, 148, 150, 0.5);
+        }
+
+        .insta-icon {
+            margin-right: 5px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .container-stories {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .mensagem-box {
+                padding: 25px 20px;
+                margin: 40px 0;
+            }
+
+            .mensagem-box p {
+                font-size: 20px;
+            }
+
+            .icon-stories {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-stories" id="storyContainer">
+        <div class="content">
+            <div class="header">
+                <img src="Buda meditante sobre flor de lótus.png" alt="Buda" class="icon-stories">
+                <h1>Iluminação Diária</h1>
+                <p class="subtitle">Seu ensinamento do dia</p>
+            </div>
+
+            <div class="mensagem-box" id="mensagemBox" style="display: none;">
+                <p id="mensagemTexto"></p>
+                <a href="https://www.instagram.com/stories/" target="_blank" class="share-button-insta">
+                    📸 Compartilhar no Stories
+                </a>
+            </div>
+
+            <div class="form-stories" id="formStories">
+                <input 
+                    type="text" 
+                    id="nomeStories" 
+                    placeholder="Digite seu nome..."
+                    autofocus
+                >
+                <button onclick="gerarStory()">Gerar Mensagem</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>✨ Iluminação Diária ✨</p>
+            <p class="share-hint">Capture e compartilhe nos stories!</p>
+            <a href="https://www.instagram.com/" target="_blank" class="share-button">
+                <span class="insta-icon">📸</span> Ir para Instagram
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const MENSAGENS = [
+            "O sofrimento existe, mas esquecido não durará.",
+            "Que todos os seres sejam livres do sofrimento.",
+            "A compaixão é o verdadeiro caminho para a paz interior.",
+            "Cada momento é uma oportunidade para começar novamente.",
+            "O ego é a raiz de toda ilusão e sofrimento.",
+            "A iluminação não é atingir algo novo, é acordar para a realidade.",
+            "Cultive a bondade e colherá a paz.",
+            "O presente é o único tempo que você realmente possui.",
+            "A mente é como água: quando está agitada, não reflete claramente.",
+            "Abandone a raiva, abandone o apego. Assim você encontrará paz.",
+            "O Buda está em você, apenas acordado e consciente.",
+            "Meditar é retornar ao seu verdadeiro eu.",
+            "Tudo é impermanente, tudo muda. Aceite isto e seja livre.",
+            "A sabedoria vem do silêncio interior.",
+            "O caminho do meio evita os extremos e leva à paz.",
+            "Perdoe os outros não porque eles merecem, mas para libertar a si mesmo.",
+            "Você é responsável pelo seu próprio despertar espiritual.",
+            "A verdadeira riqueza é o contentamento com o que você tem.",
+            "Observar seus pensamentos sem julgá-los é o começo da liberdade.",
+            "Cada respiração é uma chance de deixar ir o que não serve.",
+            "A gentileza é a força mais poderosa do universo.",
+            "Quando você consegue estar em paz consigo mesmo, está em paz com tudo.",
+            "O apego é a causa de todo o sofrimento. Solte-se.",
+            "Viva como um lótus: enraizado na lama, mas elevado e puro.",
+            "A ignorância é a escuridão, o conhecimento é a luz.",
+            "Sua natureza verdadeira é pura, calma e iluminada.",
+            "O nada que você teme não é nada, é tudo.",
+            "Cultive a paciência, ela é a raiz da paz.",
+            "A realidade é aquilo que você experimenta aqui e agora.",
+            "Cada ser tem a Natureza de Buda dentro de si.",
+            "Não procure a verdade fora de você, está dentro.",
+            "A morte não é o fim, é uma transformação.",
+            "Viva com intenção, cada ação tem consequências.",
+            "O karma é a lei universal da causa e efeito.",
+            "Saia do reino dos pensamentos e entre no reino do ser.",
+            "A verdadeira felicidade não depende de circunstâncias externas.",
+            "Aprenda a morrer a cada dia e viverá mais plenamente.",
+            "A prática constante leva ao despertar gradual.",
+            "Você não é seus pensamentos, você é o observador deles.",
+            "O caminho para a iluminação começa onde você está.",
+            "A aceitação é o primeiro passo para a transformação.",
+            "Renuncie ao desejo de controlar tudo e ganhe verdadeira liberdade.",
+            "Cada momento é sagrado quando vivido com plena atenção.",
+            "A compaixão começa com o amor por si mesmo.",
+            "Escape da prisão da mente através da meditação.",
+            "O nirvana não é um lugar, é um estado de ser.",
+            "Cultive a alegria genuína pela felicidade dos outros.",
+            "A verdade é simples: sofra menos, ame mais.",
+            "Você é o criador do seu próprio destino através das ações presentes.",
+            "O Buda ensinou: desperte e seja livre, mas a jornada é sua."
+        ];
+
+        function obterMensagemStory(nome) {
+            if (!nome || typeof nome !== 'string') {
+                throw new Error('Digite um nome válido');
+            }
+            
+            const nomeCapitalizado = nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase();
+            const hoje = new Date().toISOString().split('T')[0];
+            const chave = `biscoito_${nomeCapitalizado}`;
+            const dados = JSON.parse(localStorage.getItem(chave)) || {};
+
+            if (dados.data !== hoje) {
+                const seed = nomeCapitalizado + hoje;
+                let hash = 0;
+                for (let i = 0; i < seed.length; i++) {
+                    hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+                    hash = hash & hash;
+                }
+                const novoIndice = Math.abs(hash) % MENSAGENS.length;
+                
+                dados.data = hoje;
+                dados.indice = novoIndice;
+                localStorage.setItem(chave, JSON.stringify(dados));
+            }
+
+            return `${nomeCapitalizado}, ${MENSAGENS[dados.indice]}`;
+        }
+
+        function gerarStory() {
+            const nome = document.getElementById('nomeStories').value.trim();
+            const mensagemBox = document.getElementById('mensagemBox');
+            const mensagemTexto = document.getElementById('mensagemTexto');
+            const formStories = document.getElementById('formStories');
+
+            try {
+                const mensagem = obterMensagemStory(nome);
+                mensagemTexto.textContent = mensagem;
+                mensagemBox.style.display = 'block';
+                formStories.style.display = 'none';
+            } catch (erro) {
+                alert(erro.message);
+            }
+        }
+
+        document.getElementById('nomeStories').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                gerarStory();
+            }
+        });
+    </script>
+</body>
+</html>
