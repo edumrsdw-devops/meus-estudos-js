@@ -101,6 +101,18 @@
             padding: 35px 30px;
             margin: 50px 0;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .mensagem-box p {
@@ -127,13 +139,14 @@
         input {
             flex: 1;
             padding: 12px 15px;
-            border: none;
+            border: 2px solid transparent;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.95);
             color: #333;
             font-size: 15px;
             font-weight: 300;
             text-align: center;
+            transition: all 0.3s ease;
         }
 
         input::placeholder {
@@ -142,7 +155,9 @@
 
         input:focus {
             outline: none;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            border-color: rgba(157, 139, 126, 0.5);
+            box-shadow: 0 0 15px rgba(157, 139, 126, 0.3);
+            transform: translateY(-2px);
         }
 
         button {
@@ -160,10 +175,19 @@
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        button:hover {
+        button:hover:not(:disabled) {
             background: linear-gradient(135deg, #b5a399 0%, #a89587 100%);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
         }
 
         .footer {
@@ -229,7 +253,18 @@
         }
 
         .insta-icon {
-            margin-right: 5px;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 8px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: brightness(1);
+        }
+
+        .share-button:hover .insta-icon,
+        .share-button-insta:hover .insta-icon {
+            transform: scale(1.1) rotate(5deg);
+            filter: brightness(1.2);
         }
 
         .hide {
@@ -273,7 +308,7 @@
             <div class="mensagem-box" id="mensagemBox" style="display: none;">
                 <p id="mensagemTexto"></p>
                 <a href="https://www.instagram.com/stories/" target="_blank" class="share-button-insta">
-                    📸 Compartilhar no Stories
+                    <img src="insta logo-icon.png" alt="Instagram" class="insta-icon"> Compartilhar no Stories
                 </a>
             </div>
 
@@ -292,13 +327,13 @@
             <p>✨ Iluminação Diária ✨</p>
             <p class="share-hint">Capture e compartilhe nos stories!</p>
             <a href="https://www.instagram.com/" target="_blank" class="share-button">
-                <span class="insta-icon">📸</span> Ir para Instagram
+                <img src="insta logo-icon.png" alt="Instagram" class="insta-icon"> Ir para Instagram
             </a>
         </div>
     </div>
 
     <script>
-        const MENSAGENS = [
+            const MENSAGENS = [
             "O sofrimento existe, mas esquecido não durará.",
             "Que todos os seres sejam livres do sofrimento.",
             "A compaixão é o verdadeiro caminho para a paz interior.",
@@ -327,7 +362,7 @@
             "Sua natureza verdadeira é pura, calma e iluminada.",
             "O nada que você teme não é nada, é tudo.",
             "Cultive a paciência, ela é a raiz da paz.",
-            "A realidade é aquilo que você experimenta aqui e agora.",
+            "A realidade é aquilo que você experiencia aqui e agora.",
             "Cada ser tem a Natureza de Buda dentro de si.",
             "Não procure a verdade fora de você, está dentro.",
             "A morte não é o fim, é uma transformação.",
@@ -348,7 +383,56 @@
             "Cultive a alegria genuína pela felicidade dos outros.",
             "A verdade é simples: sofra menos, ame mais.",
             "Você é o criador do seu próprio destino através das ações presentes.",
-            "O Buda ensinou: desperte e seja livre, mas a jornada é sua."
+            "O Buda ensinou: desperte e seja livre, mas a jornada é sua.",
+            "O silêncio é a linguagem da alma desperta.",
+            "Não busque a iluminação, simplesmente pare de obscurecer sua luz.",
+            "A raiva é como segurar uma brasa quente: você é quem se queima.",
+            "O desapego não é não ter nada, é nada ter você.",
+            "Cada passo no caminho é o caminho completo.",
+            "A mente que busca está sempre perdida, a mente que encontra está sempre aqui.",
+            "O maior obstáculo para a iluminação é pensar que você já sabe.",
+            "Não existe caminho para a felicidade, a felicidade é o caminho.",
+            "O lótus floresce na lama, não apesar dela.",
+            "A meditação é a arte de estar presente sem esforço.",
+            "O sofrimento termina quando a resistência termina.",
+            "Você não pode parar as ondas, mas pode aprender a surfar.",
+            "A paz não é ausência de conflito, é a presença de equanimidade.",
+            "O ego é a ilusão de separação, o despertar é ver a unidade.",
+            "Cada expiração é uma pequena morte, cada inspiração é um renascimento.",
+            "A sabedoria não é saber mais, é ser mais.",
+            "O presente é um presente que você dá a si mesmo.",
+            "Não espere ser feliz no futuro, seja consciente agora.",
+            "A mente iluminada não vê problemas, apenas situações.",
+            "O maior tesouro está escondido na simplicidade.",
+            "Deixe ir o que não serve mais, confie no que virá.",
+            "A verdadeira força está em não reagir, mas em responder.",
+            "Você não precisa buscar a paz, você precisa parar de criar guerra.",
+            "O ego se alimenta do drama, a consciência se nutre da quietude.",
+            "A vida é uma dança entre controle e entrega.",
+            "Cada ser que você encontra é seu professor.",
+            "A iluminação não é um destino, é o reconhecimento do que sempre foi.",
+            "Onde há amor, não há medo. Onde há medo, não há amor.",
+            "A gratidão transforma o que temos em suficiente.",
+            "O passado é memória, o futuro é imaginação, só existe agora.",
+            "A mente não treinada é um cavalo selvagem, a mente treinada é um aliado.",
+            "Não busque respostas fora, pergunte ao silêncio dentro de você.",
+            "A verdadeira riqueza é não desejar nada.",
+            "O sábio vê o extraordinário no ordinário.",
+            "A compaixão sem limites é a natureza do despertar.",
+            "Você não é o que acontece com você, você é como responde ao que acontece.",
+            "O presente momento é o único portal para a eternidade.",
+            "A mente ocupada é uma prisão, a mente vazia é um palácio.",
+            "Não há caminho errado, apenas experiências necessárias.",
+            "A iluminação é simples: pare de adicionar, comece a subtrair.",
+            "O que você resiste, persiste. O que você aceita, se transforma.",
+            "A verdadeira liberdade é não precisar de nada para ser feliz.",
+            "O ego busca, a consciência é.",
+            "Cada obstáculo é um convite para crescer.",
+            "A paz interior não requer condições perfeitas, requer percepção perfeita.",
+            "Você é o céu, tudo o mais é apenas o clima.",
+            "O despertar não é sobre se tornar algo, é sobre lembrar quem você sempre foi.",
+            "A mente que julga nunca descansa, a mente que aceita sempre está em paz.",
+            "Não há separação entre você e o universo, você é o universo se experienciando."
         ];
 
         function obterMensagemStory(nome) {
@@ -379,23 +463,42 @@
         }
 
         function gerarStory() {
-            const nome = document.getElementById('nomeStories').value.trim();
+            const inputNome = document.getElementById('nomeStories');
+            const nome = inputNome.value.trim();
             const mensagemBox = document.getElementById('mensagemBox');
             const mensagemTexto = document.getElementById('mensagemTexto');
             const formStories = document.getElementById('formStories');
+            const botao = formStories.querySelector('button');
+
+            if (!nome) {
+                inputNome.style.borderColor = 'rgba(255, 0, 0, 0.5)';
+                inputNome.focus();
+                setTimeout(() => {
+                    inputNome.style.borderColor = 'transparent';
+                }, 2000);
+                return;
+            }
+
+            botao.disabled = true;
 
             try {
                 const mensagem = obterMensagemStory(nome);
                 mensagemTexto.textContent = mensagem;
-                mensagemBox.style.display = 'block';
-                formStories.style.display = 'none';
+                
+                setTimeout(() => {
+                    mensagemBox.style.display = 'block';
+                    formStories.style.display = 'none';
+                    botao.disabled = false;
+                }, 100);
             } catch (erro) {
                 alert(erro.message);
+                botao.disabled = false;
             }
         }
 
         document.getElementById('nomeStories').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
+                e.preventDefault();
                 gerarStory();
             }
         });
